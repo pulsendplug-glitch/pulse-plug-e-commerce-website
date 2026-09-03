@@ -1,0 +1,37 @@
+'use client';
+
+import {useState} from 'react';
+import {Rotate3d, MousePointer2} from 'lucide-react';
+
+type Props={name:string;image:string;frames?:string[]};
+
+export default function ProductViewer({name,image,frames=[]}:Props){
+  const available=frames.length>1;
+  const [index,setIndex]=useState(0);
+  const [dragStart,setDragStart]=useState<number|null>(null);
+  const shown=available?frames[index]:image;
+
+  function onPointerDown(e:React.PointerEvent<HTMLDivElement>){
+    if(!available)return;
+    setDragStart(e.clientX);
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+  function onPointerMove(e:React.PointerEvent<HTMLDivElement>){
+    if(!available||dragStart===null)return;
+    const delta=e.clientX-dragStart;
+    if(Math.abs(delta)<18)return;
+    const step=delta>0?-1:1;
+    setIndex(i=>(i+step+frames.length)%frames.length);
+    setDragStart(e.clientX);
+  }
+  function onPointerUp(){setDragStart(null)}
+
+  return <div className="viewerWrap">
+    <div className="viewer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
+      <img src={shown} alt={name} draggable={false}/>
+      <div className="brandWatermark" aria-hidden="true">PULSE &amp; PLUG</div>
+      <div className="viewerBadge"><Rotate3d size={16}/> {available?'360° VIEW':'360° VIEW READY'}</div>
+    </div>
+    {available ? <p className="viewerHint"><MousePointer2 size={15}/> Drag left or right to rotate the product</p> : <p className="viewerHint">Upload a multi angle product image set to activate true 360° rotation. This viewer is already wired for frame based 360° assets.</p>}
+  </div>;
+}
