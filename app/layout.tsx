@@ -1,10 +1,23 @@
 import "./globals.css";
 import Link from "next/link";
+import { CreditCard, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import SiteHeader from "./components/site-header";
 
-export const metadata = { title: "Pulse & Plug | Premium Health, Recovery & Wellness Systems", description: "Premium health appliances, therapeutic recovery equipment, and wellness essentials." };
+export const metadata = {
+  title: "Pulse & Plug | Premium Health, Recovery & Wellness Systems",
+  description: "Pulse & Plug delivers high-end health appliances, therapeutic recovery equipment, and premium wellness consumables. Trusted by discerning customers across the US, Canada, UK, and Australia.",
+  keywords: ["massage chair", "red light therapy", "recovery equipment", "wellness", "health appliances", "compression boots"],
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><div className="topbar"><div className="container"><span>Free white-glove delivery on Advanced Recovery Systems</span><div className="toplinks"><a href="tel:+17864066937">☎ +1 786-406-6937</a><a href="mailto:pulsendplug@gmail.com">✉ pulsendplug@gmail.com</a></div></div></div><header className="header"><div className="container nav"><Link href="/"><img className="logo" src="https://pulse-plug-e-commerce-website.vercel.app/images/pndp.png" alt="Pulse & Plug Relief & Power"/></Link><nav className="links"><Link href="/">Home</Link><Link href="/shop">Shop</Link><Link href="/contact">Contact</Link></nav><div className="actions"><button className="iconbtn" aria-label="Dark mode">◔</button><Link className="iconbtn" href="/cart" aria-label="Cart">▢</Link><button className="iconbtn mobile" aria-label="Menu">☰</button></div></div></header><main>{children}</main><Footer/></body></html>
+  return <html lang="en" suppressHydrationWarning><body><SiteHeader /><main>{children}</main><Footer /></body></html>;
 }
 
-function Footer(){return <footer className="footer"><div className="container footerGrid"><div><img className="logo" src="https://pulse-plug-e-commerce-website.vercel.app/images/pndp.png" alt="Pulse & Plug"/><p>Premium health appliances, therapeutic recovery equipment, and wellness consumables for a healthier, more comfortable life.</p></div><div><h4>Explore</h4><ul><li><Link href="/">Home</Link></li><li><Link href="/shop">Shop</Link></li><li><Link href="/contact">Contact</Link></li><li><Link href="/cart">Cart</Link></li></ul></div><div><h4>Collections</h4><ul><li><Link href="/shop#advanced-recovery-systems">Advanced Recovery Systems</Link></li><li><Link href="/shop#targeted-therapy-devices">Targeted Therapy Devices</Link></li><li><Link href="/shop#daily-essentials">Daily Wellness Essentials</Link></li></ul></div><div><h4>Contact</h4><ul><li><a href="tel:+17864066937">+1 786-406-6937</a></li><li><a href="mailto:pulsendplug@gmail.com">pulsendplug@gmail.com</a></li><li>Serving the US, Canada, UK & Australia</li></ul></div></div><div className="container subfooter"><span>Secure, encrypted checkout · Visa · Mastercard · Amex · Apple Pay · Google Pay · Affirm · Klarna</span><span>© 2026 Pulse & Plug. All rights reserved.</span></div></footer>}
+function Footer() {
+  return <footer className="footer"><div className="container footerGrid">
+    <div><Link href="/" aria-label="Pulse & Plug home"><img className="logo" src="https://pulse-plug-e-commerce-website.vercel.app/images/pndp.png" alt="Pulse & Plug — Relief & Power" /></Link><p>Premium health appliances, therapeutic recovery equipment, and wellness consumables for a healthier, more comfortable life.</p></div>
+    <div><h4>Explore</h4><ul><li><Link href="/">Home</Link></li><li><Link href="/shop">Shop</Link></li><li><Link href="/contact">Contact</Link></li><li><Link href="/cart">Cart</Link></li></ul></div>
+    <div><h4>Collections</h4><ul><li><Link href="/shop#advanced-recovery-systems">Advanced Recovery Systems</Link></li><li><Link href="/shop#targeted-therapy-devices">Targeted Therapy Devices</Link></li><li><Link href="/shop#daily-essentials">Daily Wellness Essentials</Link></li></ul></div>
+    <div><h4>Contact</h4><ul className="contactList"><li><a href="tel:+17864066937"><Phone size={16} />+1 786-406-6937</a></li><li><a href="mailto:pulsendplug@gmail.com"><Mail size={16} />pulsendplug@gmail.com</a></li><li><span><MapPin size={16} />Serving the US, Canada, UK & Australia</span></li></ul></div>
+  </div><div className="container subfooter"><div><span className="secure"><ShieldCheck size={16} />Secure, encrypted checkout</span><div className="payments">{["Visa", "Mastercard", "Amex", "Apple Pay", "Google Pay", "Affirm", "Klarna"].map(x => <span key={x}><CreditCard size={14} />{x}</span>)}</div></div><p>© 2026 Pulse & Plug. All rights reserved.</p></div></footer>
+}
