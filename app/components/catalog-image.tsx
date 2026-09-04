@@ -1,0 +1,7 @@
+'use client';
+import React from 'react';
+import {catalogSources,catalogCrops} from '@/lib/catalog-images';
+const fileMap:Record<string,keyof typeof catalogCrops>={
+'yoga-mat.png':'premium-rubber-cork-yoga-mat','resistance-bands.png':'resistance-band-set-5-piece','foam-roller.png':'studio-grade-foam-roller','percussion-massage-gun.png':'premium-percussion-massage-gun','pilates-reformer.png':'commercial-pilates-reformer','ladder-barrel.png':'ladder-barrel-spine-corrector','4d-massage-chair.png':'4d-ai-zero-gravity-massage-chair','jade-thermal-bed.png':'far-infrared-jade-thermal-massage-bed','air-pressure-mattress.png':'luxury-memory-foam-air-pressure-mattress-system','infrared-sauna.png':'compact-commercial-infrared-sauna','cold-plunge.png':'commercial-cold-plunge-tub','acupressure-mat.png':'premium-bamboo-acupressure-mat-pillow-set','manual-chiro-table.png':'manual-chiropractic-treatment-table','power-chiro-table.png':'power-chiropractic-treatment-table'};
+type Props={src:string;alt:string;className?:string};
+export default function CatalogImage({src,alt,className}:Props){const file=src.split('/').pop()||'';const key=fileMap[file];const crop=key?catalogCrops[key]:undefined;if(!crop)return <img className={className} src={src} alt={alt} loading="lazy"/>;const source=catalogSources[crop.source];return <svg className={className||'catalogSvg'} viewBox={crop.viewBox.join(' ')} role="img" aria-label={alt} preserveAspectRatio="xMidYMid meet"><image href={source.src} x="0" y="0" width={source.width} height={source.height} preserveAspectRatio="none"/></svg>}
