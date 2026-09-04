@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./brand.css";
 import Link from "next/link";
 import { CreditCard, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import SiteHeader from "./components/site-header";
