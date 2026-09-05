@@ -1,4 +1,4 @@
-import 'use client'
+'use client'
 import Link from 'next/link'
 import { Menu, Moon, ShoppingBag, Sun, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
