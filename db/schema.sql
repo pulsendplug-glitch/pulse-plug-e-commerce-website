@@ -1,0 +1,3 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE TABLE IF NOT EXISTS products (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, slug TEXT NOT NULL UNIQUE, category TEXT NOT NULL DEFAULT 'Uncategorized', description TEXT NOT NULL DEFAULT '', price NUMERIC(12,2) NOT NULL DEFAULT 0, business_price NUMERIC(12,2), image_url TEXT NOT NULL DEFAULT '', active BOOLEAN NOT NULL DEFAULT TRUE, sort_order INTEGER NOT NULL DEFAULT 0, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+CREATE INDEX IF NOT EXISTS products_active_sort_idx ON products(active, sort_order, created_at DESC);

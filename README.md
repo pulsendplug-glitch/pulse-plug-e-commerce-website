@@ -1,19 +1,22 @@
-# Pulse & Plug E-Commerce Website
+# Pulse & Plug
 
-Reconstructed Next.js source for the Pulse & Plug e-commerce website.
+A clean Next.js storefront for Pulse & Plug with a database driven product catalog.
 
-## Current reference
-The existing production site is `https://pulse-plug-e-commerce-website.vercel.app`.
+## Product management
 
-## Stack
-Next.js 16, React 19, TypeScript and custom responsive CSS.
+The storefront starts with **zero products**. Products are created from `/admin` and are stored in Postgres. Product photos are uploaded to Vercel Blob, so product images are not committed to GitHub and there is no crop or collage system.
 
-## Routes
-- `/` Home
-- `/shop` Collections and product catalog
-- `/product/[slug]` Product details
-- `/contact` Contact and inquiry form
-- `/cart` Cart
+## Required Vercel environment variables
 
-## Important
-The first reconstruction uses the existing production deployment for image assets so the live visual catalog can be preserved while the source is recovered. Assets can be migrated into `public/images` in a later pass.
+- `DATABASE_URL` — Neon Postgres connection string
+- `BLOB_READ_WRITE_TOKEN` — Vercel Blob read/write token
+- `ADMIN_PASSWORD` — private Product Manager password
+- `ADMIN_SESSION_SECRET` — long random secret used to sign the admin session cookie
+
+The app automatically creates the `products` table on first database use. A copy of the schema is also included at `db/schema.sql`.
+
+## Admin
+
+Open `/admin`, sign in, upload a product photo, enter the product details, and add it. The product will then appear on the public Shop page.
+
+Keep all database and Blob credentials in Vercel environment variables. Never put them in client-side code or GitHub.
